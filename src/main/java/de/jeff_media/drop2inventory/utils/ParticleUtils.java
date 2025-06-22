@@ -7,7 +7,6 @@ import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.BoundingBox;
 
 import java.util.HashSet;
@@ -22,17 +21,17 @@ public class ParticleUtils {
         BoundingBox box = worldBoundingBox.getBoundingBox();
         World world = worldBoundingBox.getWorld();
         Set<Location> points = getHollowCube(box.getMin().toLocation(world), box.getMax().toLocation(world), 0.5);
-        new BukkitRunnable() {
-            int count = 0;
-            @Override
-            public void run() {
-                for(Location location : points) {
-                    player.spawnParticle(particleType, location, particleCount);
-                }
-                count++;
-                if(count >= 4) cancel();
+        final int[] count = {0};
+        final de.jeff_media.drop2inventory.utils.Scheduler.Task[] task = new de.jeff_media.drop2inventory.utils.Scheduler.Task[1];
+        task[0] = de.jeff_media.drop2inventory.utils.Scheduler.runTimer(() -> {
+            for(Location location : points) {
+                player.spawnParticle(particleType, location, particleCount);
             }
-        }.runTaskTimer(Main.getInstance(), 0, 5);
+            count[0]++;
+            if(count[0] >= 4) {
+                task[0].cancel();
+            }
+        }, 0, 5);
     }
 
     public static Set<Location> getHollowCube(Location corner1, Location corner2, double particleDistance) {

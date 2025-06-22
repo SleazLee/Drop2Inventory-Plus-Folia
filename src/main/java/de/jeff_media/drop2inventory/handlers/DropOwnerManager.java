@@ -27,7 +27,7 @@ public class DropOwnerManager {
         /*
           Clear bounding boxes
          */
-        Bukkit.getScheduler().scheduleSyncRepeatingTask(main, ()->{
+        de.jeff_media.drop2inventory.utils.Scheduler.runTimer(()->{
             //for(HashMap<WorldBoundingBox, UUID> map : new HashMap[] {dropLocationMap, hangingDropLocationMap}) {
                 Iterator<WorldBoundingBox> iterator = dropLocationMap.keySet().iterator();
                 while (iterator.hasNext()) {

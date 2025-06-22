@@ -34,7 +34,7 @@ public class EventManager {
 
         pendingXpDrops.put(player,orb);
 
-        Bukkit.getScheduler().scheduleSyncDelayedTask(main, () -> {
+        de.jeff_media.drop2inventory.utils.Scheduler.runLater(() -> {
             pendingXpDrops.remove(player);
         },1);
     }

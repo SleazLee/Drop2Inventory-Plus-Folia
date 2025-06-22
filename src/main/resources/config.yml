@@ -304,34 +304,10 @@ disabled-mobs:
 ##########################
 
 # When you are using plugins that are not up to date with modern Spigot events,
-# set this to true. For example, SuperiorSkyBlock2 still listens to the
-# PlayerPickupItemEvent in 1.17, which has been deprecated since 4(!) years
-# as the time of writing this
+# set this to true.
 im-using-outdated-plugins: false
 
-# When set to true, and the player is inside the area of a SuperiorSkyblock2 island,
-# drops will only be collected if the player is either
-# - the island's owner, or
-# - a member of the island, or
-# - a coop player of the island
-superior-skyblock-collect-only-on-own-islands: false
-
 ##########################
-##### Update Checker #####
-##########################
-
-# Checks for updates (asynchronously).
-# When enabled, a message is printed in the console if a new
-# version has been found, and OPs will be notified when they join the server
-# When set to true, check for updates on startup and every X hours (see "check-interval" below)
-# When set to on-startup, only check on server startup
-# When set to false, don't check for updates
-check-for-updates: true
-
-# When you set "check-for-updates" to true, you can define the amount
-# of hours inbetween each update check.
-check-interval: 4
-
 #########################
 ##### localization ######
 #########################
