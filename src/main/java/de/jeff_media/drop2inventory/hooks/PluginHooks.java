@@ -16,9 +16,6 @@ public class PluginHooks {
     };
 
     public PluginHooks() {
-        if(Bukkit.getPluginManager().getPlugin("WildChests") != null) {
-            Bukkit.getPluginManager().registerEvents(new WildChestsHook(), main);
-        }
     }
 
 

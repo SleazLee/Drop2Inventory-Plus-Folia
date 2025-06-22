@@ -21,10 +21,7 @@ import de.jeff_media.drop2inventory.utils.IngotCondenser;
 import de.jeff_media.drop2inventory.utils.SoundUtils;
 import de.jeff_media.drop2inventory.utils.Utils;
 import de.jeff_media.morepersistentdatatypes.DataType;
-import de.jeff_media.updatechecker.UpdateChecker;
-import de.jeff_media.updatechecker.UserAgentBuilder;
 import lombok.Getter;
-import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -67,7 +64,6 @@ public class Main extends JavaPlugin {
     @Getter private boolean mobsIsWhitelist = false;
     @Getter private SoundUtils soundUtils;
     @Getter private Utils utils;
-    private UpdateChecker updateChecker;
     boolean usingMatchingConfig = true;
     @Getter private HopperDetector hopperDetector;
     @Getter private PluginHooks pluginHooks;
@@ -201,7 +197,7 @@ public class Main extends JavaPlugin {
                 getLogger().warning("which is not allowed according to the Spigot API documentation. Furthermore, this custom");
                 getLogger().warning("implementation is corrupted, as it returns \"null\" for a method annotated with \"@NotNull\".");
                 getLogger().severe("The problem was caused by the following plugin: " + weirdPluginName + " (Class: " + weirdClass + ")");
-                Bukkit.getScheduler().runTaskLater(this, () -> showedWeirdPluginWarning = false, 19);
+                de.jeff_media.drop2inventory.utils.Scheduler.runLater(() -> showedWeirdPluginWarning = false, 19);
             }
             return null;
         }
@@ -301,7 +297,6 @@ public class Main extends JavaPlugin {
         pluginHooks = new PluginHooks();
         //mendingUtils = new MendingUtils(this);
 
-        Metrics metrics = new Metrics(this, 9970);
 
         this.getCommand("drop2inventory").setExecutor(commandMain);
         this.getCommand("drop2inventory").setTabCompleter(new CommandMainTabCompleter());
@@ -322,27 +317,9 @@ public class Main extends JavaPlugin {
         autoSmelter = new AutoSmelter(this);
         hopperDetector = new HopperDetector();
 
-        // Update Checker start
-        // TODO: Switch to my new Update Checker -> https://github.com/JEFF-Media-GbR/Spigot-UpdateChecker
-        if (updateChecker != null) {
-            updateChecker.stop();
-        }
-        updateChecker = UpdateChecker.init(this, "https://api.jeff-media.de/drop2inventoryplus/drop2inventoryplus-latest-version.txt")
-                .setDownloadLink(87784)
-                .setChangelogLink(87784)
-                .setDonationLink("https://paypal.me/mfnalex")
-                .setUserAgent(UserAgentBuilder.getDefaultUserAgent().addSpigotUserId())
-                .onFail((commandSenders, exception) -> { });
-        if (getConfig().getString(Config.CHECK_FOR_UPDATES, "true").equalsIgnoreCase("true")) {
-            updateChecker.checkEveryXHours(getConfig().getDouble(Config.UPDATE_CHECK_INTERVAL)).checkNow();
-        } else if (getConfig().getString(Config.CHECK_FOR_UPDATES, "true").equalsIgnoreCase("on-startup")) {
-            updateChecker.checkNow();
-        }
         Utils.loadSounds();
 
         loadRunCommands();
-
-        // Update Checker end
         //blockDropItemPrio = Enums.getIfPresent(EventPriority.class, getConfig().getString(Config.EVENT_PRIO_BLOCKDROPITEMEVENT).toUpperCase()).or(EventPriority.HIGH);
     }
 

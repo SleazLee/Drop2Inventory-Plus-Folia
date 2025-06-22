@@ -6,10 +6,8 @@ import de.jeff_media.drop2inventory.data.DropSubject;
 import de.jeff_media.drop2inventory.handlers.DropOwnerManager;
 import de.jeff_media.drop2inventory.handlers.EventManager;
 import de.jeff_media.drop2inventory.handlers.PermissionChecker;
-import de.jeff_media.drop2inventory.hooks.SuperiorSkyblock2Hook;
 import de.jeff_media.drop2inventory.utils.PDCUtils;
 import de.jeff_media.drop2inventory.utils.Utils;
-import com.jeff_media.jefflib.PluginUtils;
 import org.bukkit.Location;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Item;
@@ -121,10 +119,7 @@ public class CollectListener implements Listener {
             if (main.isDebug()) main.debug("  Don't pick up: EntityPickUpItemEvent cancelled");
             return;
         }
-        if(main.getConfig().getBoolean(Config.SUPERIOR_SKYBLOCK_ONLY_ON_OWN_ISLANDS)) {
-            boolean isInForeignIsland = PluginUtils.whenInstalled("SuperiorSkyblock2", () -> SuperiorSkyblock2Hook.isInForeignIsland(player, location), false);
-            if(isInForeignIsland) return;
-        }
+
 
 
         event.setCancelled(true);
