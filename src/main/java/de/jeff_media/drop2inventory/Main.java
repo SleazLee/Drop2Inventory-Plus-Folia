@@ -2,7 +2,6 @@ package de.jeff_media.drop2inventory;
 
 import com.allatori.annotations.DoNotRename;
 import com.jeff_media.cesspool.config.CommandList;
-import de.jeff_media.daddy.Daddy_Stepsister;
 import de.jeff_media.drop2inventory.commands.CommandMain;
 import de.jeff_media.drop2inventory.commands.CommandMainTabCompleter;
 import de.jeff_media.drop2inventory.config.Config;
@@ -20,7 +19,7 @@ import de.jeff_media.drop2inventory.utils.HotbarStuffer;
 import de.jeff_media.drop2inventory.utils.IngotCondenser;
 import de.jeff_media.drop2inventory.utils.SoundUtils;
 import de.jeff_media.drop2inventory.utils.Utils;
-import de.jeff_media.morepersistentdatatypes.DataType;
+import com.jeff_media.morepersistentdatatypes.DataType;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -255,11 +254,6 @@ public class Main extends JavaPlugin {
     }
 
     public void onEnable() {
-
-        Daddy_Stepsister.init(this);
-        if(Daddy_Stepsister.allows(null)) {
-            Daddy_Stepsister.createVerificationFile();
-        }
 
         HAS_DROP_COLLECTION_ENABLED_TAG = new NamespacedKey(this, "dropcollectionenabled");
         HAS_SEEN_MESSAGE_TAG = new NamespacedKey(this, "hasseenmessage");

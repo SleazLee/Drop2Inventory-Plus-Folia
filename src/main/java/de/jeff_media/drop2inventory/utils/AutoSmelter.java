@@ -4,7 +4,7 @@ import com.jeff_media.jefflib.NumberUtils;
 import de.jeff_media.drop2inventory.Main;
 import de.jeff_media.drop2inventory.config.Config;
 import de.jeff_media.drop2inventory.config.Permissions;
-import de.jeff_media.morepersistentdatatypes.DataType;
+import com.jeff_media.morepersistentdatatypes.DataType;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
