@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit;
 @DoNotRename
 public class Utils {
 
-    private static SoundData inventoryFullSound = new SoundData(Sound.ENTITY_ITEM_PICKUP.getKey().toString(), 1, 1, 0.2f, SoundCategory.BLOCKS);
+    private static SoundData inventoryFullSound = new SoundData(Sound.ENTITY_ITEM_PICKUP.key().asString(), 1, 1, 0.2f, SoundCategory.BLOCKS);
     final Main main;
 
     public Utils(Main main) {
