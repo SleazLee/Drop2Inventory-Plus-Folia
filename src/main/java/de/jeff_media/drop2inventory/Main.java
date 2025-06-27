@@ -1,6 +1,5 @@
 package de.jeff_media.drop2inventory;
 
-import com.allatori.annotations.DoNotRename;
 import com.jeff_media.cesspool.config.CommandList;
 import de.jeff_media.drop2inventory.commands.CommandMain;
 import de.jeff_media.drop2inventory.commands.CommandMainTabCompleter;
@@ -40,26 +39,20 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.function.BiConsumer;
 
-@DoNotRename
 public class Main extends JavaPlugin {
 
     public static final String uid = "%%__USER__%%";
     private static Main instance;
     public EventPriority blockDropItemPrio;
-    @DoNotRename
     public boolean blocksIsWhitelist = false;
     @Getter private boolean debug = false;
-    @DoNotRename
     public ArrayList<Material> disabledBlocks;
-    @DoNotRename
     public ArrayList<String> disabledMobs;
-    @DoNotRename
     public ArrayList<String> disabledWorlds;
     public HotbarStuffer hotbarStuffer;
     public IngotCondenser ingotCondenser;
     public AutoSmelter autoSmelter;
     @Getter private Messages messages;
-    @DoNotRename
     @Getter private boolean mobsIsWhitelist = false;
     @Getter private SoundUtils soundUtils;
     @Getter private Utils utils;
@@ -73,7 +66,6 @@ public class Main extends JavaPlugin {
     public static NamespacedKey IGNORED_DROP_TAG;
     private boolean showedWeirdPluginWarning = false;
 
-    @DoNotRename
     public static Main getInstance() {
         return instance;
     }
@@ -203,7 +195,6 @@ public class Main extends JavaPlugin {
         return pdc;
     }
 
-    @DoNotRename
     public boolean enabled(Player p) {
 
         if (getConfig().getBoolean(Config.ALWAYS_ENABLED)) return true;
@@ -215,7 +206,6 @@ public class Main extends JavaPlugin {
         return value == (byte) 1 ? true : false;
     }
 
-    @DoNotRename
     public boolean hasSeenMessage(Player p) {
         PersistentDataContainer pdc = getPdcAndCheckForStupidPlugins(p);
         if(pdc == null) return false;
