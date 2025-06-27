@@ -477,5 +477,5 @@ message-no-permission: "&cYou don't have permissions to do that."
 debug: false
 
 # Do not change the values below manually!
-config-version: 202506270526
+config-version: 202506270640
 plugin-version: 4.8.0
