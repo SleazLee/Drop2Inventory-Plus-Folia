@@ -3,7 +3,7 @@ package de.jeff_media.drop2inventory.utils;
 import de.jeff_media.drop2inventory.Main;
 import de.jeff_media.drop2inventory.config.Config;
 import de.jeff_media.drop2inventory.config.Permissions;
-import com.jeff_media.jefflib.data.SoundData;
+import de.jeff_media.drop2inventory.data.SoundData;
 import org.bukkit.*;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
@@ -18,7 +18,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Utils {
 
-    private static SoundData inventoryFullSound = new SoundData(Sound.ENTITY_ITEM_PICKUP.key().asString(), 1, 1, 0.2f, SoundCategory.BLOCKS);
+    private static SoundData inventoryFullSound = new SoundData("entity.item.pickup", 1, 1, 0.2f, SoundCategory.BLOCKS);
     final Main main;
 
     public Utils(Main main) {
