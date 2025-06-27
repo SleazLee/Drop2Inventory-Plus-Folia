@@ -1,6 +1,5 @@
 package de.jeff_media.drop2inventory.utils;
 
-import com.allatori.annotations.DoNotRename;
 import de.jeff_media.drop2inventory.Main;
 import de.jeff_media.drop2inventory.config.Config;
 import de.jeff_media.drop2inventory.config.Permissions;
@@ -17,10 +16,9 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
-@DoNotRename
 public class Utils {
 
-    private static SoundData inventoryFullSound = new SoundData(Sound.ENTITY_ITEM_PICKUP.getKey().toString(), 1, 1, 0.2f, SoundCategory.BLOCKS);
+    private static SoundData inventoryFullSound = new SoundData(Sound.ENTITY_ITEM_PICKUP.key().asString(), 1, 1, 0.2f, SoundCategory.BLOCKS);
     final Main main;
 
     public Utils(Main main) {
@@ -31,7 +29,6 @@ public class Utils {
         inventoryFullSound = SoundData.fromConfigurationSection(Main.getInstance().getConfig(), "sound-inv-full-");
     }
 
-    @DoNotRename
     public static void addOrDrop(ItemStack item, Player player, @Nullable Location dropLocation) {
         //main.debug("addOrDrop: " + item.toString() + " -> " + player.getName());
 
@@ -58,7 +55,6 @@ public class Utils {
         }
     }
 
-    @DoNotRename
     public static void addOrDrop(ItemStack[] items, Player player, @Nullable Location dropLocation) {
         Main main = Main.getInstance();
         if (main.isDebug()) main.debug("addOrDrop[] " + Arrays.toString(items) + " -> " + player);
