@@ -23,10 +23,17 @@ public class SoundUtils {
     private final float soundVolume;
     private final float soundPitchVariant;
 
+    private static String toSoundKey(String input) {
+        if (input.equals(input.toUpperCase()) && !input.contains(".") && !input.contains(":")) {
+            return input.toLowerCase().replace('_', '.');
+        }
+        return input;
+    }
+
     public SoundUtils() {
         final Main main = Main.getInstance();
         final String soundName = main.getConfig().getString(Config.SOUND_EFFECT);
-        sound = soundName;
+        sound = toSoundKey(soundName);
         soundEnabled = main.getConfig().getBoolean(Config.SOUND_ENABLED);
         soundGlobal = main.getConfig().getBoolean(Config.SOUND_GLOBAL);
         soundVolume = (float) main.getConfig().getDouble(Config.SOUND_VOLUME);
