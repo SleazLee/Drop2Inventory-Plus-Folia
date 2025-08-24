@@ -8,35 +8,32 @@ import org.bukkit.entity.ExperienceOrb;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import de.jeff_media.drop2inventory.utils.Scheduler;
 
 public class EventManager {
 
     private static final Main main = Main.getInstance();
-    private static final Map<Player, ExperienceOrb> pendingXpDrops = new HashMap<>();
+    private static final Map<Player, ExperienceOrb> pendingXpDrops = new ConcurrentHashMap<>();
 
     // TODO: This isn't event related anymore, move to another class
     public static void giveAdjustedXP(Player player, int originalExperience) {
         if (originalExperience == 0) return;
-        //player.giveExp(getExperienceToGive(player, originalExperience));
 
-        if(pendingXpDrops.containsKey(player)) {
+        Scheduler.run(player.getLocation(), () -> {
             ExperienceOrb orb = pendingXpDrops.get(player);
-            if(orb.isValid() && !orb.isDead()) {
+            if (orb != null && orb.isValid() && !orb.isDead()) {
                 orb.setExperience(orb.getExperience() + originalExperience);
-                return;
+            } else {
+                orb = player.getWorld().spawn(player.getLocation(), ExperienceOrb.class);
+                orb.setExperience(originalExperience);
+                orb.setVelocity(player.getVelocity());
+                pendingXpDrops.put(player, orb);
             }
-        }
-        ExperienceOrb orb = player.getWorld().spawn(player.getLocation(), ExperienceOrb.class);
-        orb.setExperience(originalExperience);
-        orb.setVelocity(player.getVelocity());
 
-        pendingXpDrops.put(player,orb);
-
-        de.jeff_media.drop2inventory.utils.Scheduler.runLater(() -> {
-            pendingXpDrops.remove(player);
-        },1);
+            Scheduler.runLater(player.getLocation(), () -> pendingXpDrops.remove(player), 1);
+        });
     }
 
     public static boolean mayPickUp(Player player, Item item) {
