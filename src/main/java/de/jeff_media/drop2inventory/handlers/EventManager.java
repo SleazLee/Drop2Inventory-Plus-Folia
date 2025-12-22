@@ -21,18 +21,22 @@ public class EventManager {
     public static void giveAdjustedXP(Player player, int originalExperience) {
         if (originalExperience == 0) return;
 
-        Scheduler.run(player.getLocation(), () -> {
+        final var location = player.getLocation();
+        Scheduler.run(location, () -> {
+            if (location.getWorld() == null) {
+                return;
+            }
             ExperienceOrb orb = pendingXpDrops.get(player);
             if (orb != null && orb.isValid() && !orb.isDead()) {
                 orb.setExperience(orb.getExperience() + originalExperience);
             } else {
-                orb = player.getWorld().spawn(player.getLocation(), ExperienceOrb.class);
+                orb = location.getWorld().spawn(location, ExperienceOrb.class);
                 orb.setExperience(originalExperience);
                 orb.setVelocity(player.getVelocity());
                 pendingXpDrops.put(player, orb);
             }
 
-            Scheduler.runLater(player.getLocation(), () -> pendingXpDrops.remove(player), 1);
+            Scheduler.runLater(location, () -> pendingXpDrops.remove(player), 1);
         });
     }
 
