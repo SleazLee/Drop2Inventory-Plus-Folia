@@ -6,7 +6,7 @@ prefix: ${spigot.prefix}
 authors: [mfnalex, JEFF Media GbR]
 website: "https://www.spigotmc.org/resources/authors/mfnalex.175238/"
 database: false
-api-version: '1.21'
+api-version: "26.3"
 folia-supported: true
 load: POSTWORLD
 

@@ -1,3 +1,32 @@
+# Drop2InventoryPlus-Folia
+
+## Folia 26.3 update (4.8.1)
+
+Requires Java 25 and Folia 26.3. The build targets `dev.folia:folia-api:26.3.build.5-alpha`.
+
+JeffLib 14.3.1's version parser assumes the older Bukkit API version format.
+On `26.3.build.5-alpha`, it tries to parse `build` as a patch number and prevents
+Drop2Inventory from enabling. This fork includes a corrected `McVersion` class
+that uses `Bukkit.getMinecraftVersion()` and compares the complete major, minor,
+and optional patch numbers. Maven excludes the original class from JeffLib and
+relocates the patched class into Drop2Inventory's private library package.
+
+Build and run the regression and packaged-library checks with Java 25 and Maven:
+
+```sh
+mvn clean verify
+```
+
+The installable plugin is `target/Drop2InventoryPlus-Folia-4.8.1.jar`;
+dependencies are already included. Stop the server, replace the old
+Drop2InventoryPlus JAR with this one, and restart. Keep the existing
+configuration files and player data.
+
+The automated checks cover version parsing, initialization of JeffLib from
+the packaged JAR, and loading `run-commands.yml` using the Folia 26.3 API with a
+simulated server. They do not replace testing drop collection, auto-smelting,
+and auto-condensing on a running server.
+
 ## Commands
 `/drop2inv` - Toggle Drop2Inventory for current player
 `/drop2inv <player>` - Toggle Drop2Inventory for <player>
@@ -34,8 +63,7 @@ out several optional dependencies. The highlights of this update are:
   Folia and chooses the correct scheduler. All previous calls to `Bukkit#getScheduler()`
   now route through this helper so the plugin works on both standard Paper and
   Folia servers.
-- **Paper API** – Replaced Spigot API dependencies with Paper, giving access to
-  Folia classes while remaining backwards compatible.
+- **Folia API** – The project compiles against Folia 26.3's API.
 - **Removed Metrics and Update Checks** – The optional bStats metrics and
   SpigotUpdateChecker have been entirely removed. No statistics are collected and
   the plugin no longer checks Spigot for updates.

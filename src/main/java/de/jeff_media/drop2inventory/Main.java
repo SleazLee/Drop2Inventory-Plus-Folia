@@ -33,7 +33,7 @@ import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 import javax.xml.stream.events.Namespace;
 import java.io.*;
 import java.util.ArrayList;

@@ -1,3 +1,9 @@
+## 4.8.1
+- Target Folia 26.3 build 5 and Java 25.
+- Fix JeffLib's startup crash on versions such as `26.3.build.5-alpha` by reading the Minecraft game version.
+- Include the corrected version reader in the shaded plugin and add regression checks for its initialization.
+- Update Lombok and explicitly enable annotation processing for Java 25 builds.
+
 ## 4.5.0
 - Shearing entities now collects drops properly
 - Entity Blacklist/Whitelist now works for all entity types (not just living entities)
